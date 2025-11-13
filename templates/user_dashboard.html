@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kullanıcı Paneli</title>
+</head>
+<body>
+    <h2>Hoş geldiniz {{ session['username'] }}!</h2>
+    <p>Mevcut CL: {{ cl }}</p>
+
+    {% if bonus %}
+        <p style="color:green;"><strong>İlk giriş bonusu +50 CL kazandınız!</strong></p>
+    {% endif %}
+
+    <h4>Yönetici Mesajları</h4>
+    <ul>
+    {% for msg in messages %}
+        <li>
+            {{ msg.date }} -
+            {% if msg.deleted %}
+                <em>Bu mesaj kullanıcı tarafından silindi.</em>
+            {% else %}
+                {{ msg.text }}
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <form method="POST" action="/logout"><button>Çıkış</button></form>
+
+    <div style="position:fixed; right:10px; top:10px; color:gray; font-size:small;">
+        Normal sorularınız ve mesajlarınız Microsoft Teams üzerinden yapılır.<br>
+        Microsoft Teams kullanıcı adımız: <strong>Cleaner Temizlik Hizmetleri Taha Hizmet</strong>
+    </div>
+</body>
+</html>
