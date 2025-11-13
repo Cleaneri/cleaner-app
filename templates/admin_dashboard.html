@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yönetici Paneli</title>
+</head>
+<body>
+    <h2>Hoş geldin yönetici!</h2>
+    <form method="POST">
+        <select name="selected_user" required>
+            <option disabled selected>Kullanıcı Seç</option>
+            {% for user in users %}
+                {% if user != "Cleaner Personeli" %}
+                    <option value="{{ user }}">{{ user }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit">Kullanıcıyı Gör</button>
+    </form>
+    <form method="POST" action="/logout"><button>Çıkış</button></form>
+</body>
+</html>
