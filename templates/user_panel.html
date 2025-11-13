@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kullanıcı Yönetimi</title>
+</head>
+<body>
+    <h3>{{ username }} Kullanıcı Paneli</h3>
+    <p>CL: {{ cl }}</p>
+    <form method="POST">
+        <input name="amount" placeholder="CL değişimi">
+        <button type="submit">CL Güncelle</button>
+    </form>
+
+    <h4>Mesaj Gönderin</h4>
+    <form method="POST">
+        <textarea name="new_message" placeholder="Mesajınızı yazın..." required></textarea>
+        <button type="submit">Gönder</button>
+    </form>
+
+    <h4>Gönderilen Mesajlar</h4>
+    <ul>
+    {% for i, msg in enumerate(messages) %}
+        <li>
+            {{ msg.date }} -
+            {% if msg.deleted %}
+                <em>Bu mesaj kullanıcı tarafından silindi.</em>
+            {% else %}
+                {{ msg.text }}
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="delete_index" value="{{ i }}">
+                    <button type="submit">Sil</button>
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    <p style="color:green;">{{ message }}</p>
+</body>
+</html>
